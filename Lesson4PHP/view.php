@@ -39,7 +39,10 @@
 
         ?>
     </p>
-
+    <div>
+        block,unblock/delete
+        <input type="checkbox" name="choise" value="delete">
+    </div>
     <table class="table table-striped table-bordered" id="root-id">
         <thead >
         <tr>

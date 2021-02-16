@@ -4,18 +4,16 @@ session_start();
 
 $data=$_POST;
 $isUser=false;
-foreach ($data as $id){
-    $user=R::load('users',$id);
-    if($user->status=='unblock'){
-        $user->status='block';
-        if($user->id==$_SESSION['id']){
-            $isUser=true;
-        }
-    }else{
-        $user->status='unblock';
+if($data['choise']=='delete'){
+    foreach ($data as $id){
+        DBconnection::delateUser($id);
     }
-    R::store($user);
+}else{
+    foreach ($data as $id){
+        $isUser=DBconnection::updateStatus($id,$isUser,$_SESSION['id']);
+    }
 }
+
 if($isUser){
     header('Location: http://localhost/dashboard/Lesson4PHP/autorization.php');
 }else {
